@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Paciente implements loginUser{
+public class Paciente implements loginUser, userMenu{
     Scanner entrada = new Scanner(System.in);
 
     private String ID;
@@ -150,6 +150,68 @@ public class Paciente implements loginUser{
         }
         return condicion;
     }
+
+
+    //Metodo para imprimir el menu personalizado de los doctores
+    public Integer showuserMenu(){
+        Scanner entrada = new Scanner(System.in);
+        boolean condicion = false; //Valor que controla el ciclo while de digite una opcion del menu personalizado de Paciente
+        Integer valorEvaluado = 0;
+
+        System.out.println("\n\n*************Menu de Paciente*************\n"
+                +"1) Crear cita\n"
+                +"2) Ver citas\n"
+                +"0) Cerrar sesión\n"
+        );
+        while(!condicion){
+            try{
+                System.out.println("Digite una opción: ");
+                Integer opcion = entrada.nextInt();
+
+                if(opcion < 0 || opcion > 2) throw new Exception();
+                if(opcion < 0 || opcion > 2){
+                    condicion = false;
+                }else{
+                    condicion = true;
+                }
+
+                valorEvaluado = opcion;
+            }catch (InputMismatchException e){
+                System.out.println("Dato inválido, digite un número del 0 al 2");
+                entrada.next();
+            }catch(Exception e){
+                System.out.println("Dato inválido, digite un número del 0 al 2");
+            }
+
+        }
+        return valorEvaluado;
+    }
+
+
+    //Metodo para evaluar y ejecutar las opciones del menu personalizado administrador
+    public boolean evaluatecustomMenu(Integer a){
+        Boolean condicion = true;
+
+        switch (a){
+            case 0:
+                condicion = false;
+                System.out.println("*************Menu de Pacienter*************");
+                System.out.println("Cerrando sesión....");
+                System.out.println("Regresando al menú principal...\n\n");
+                break;
+
+            case 1:
+                System.out.println("Crear cita");
+                break;
+
+            case 2:
+                condicion = true;
+                System.out.println("Ver citas");
+                break;
+        }
+        return condicion;
+    }
+
 
 
 

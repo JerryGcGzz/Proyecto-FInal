@@ -108,7 +108,12 @@ public static boolean evaluateMenu(Integer a){
                     if(ejemplo3.verifyLoginP() == true){
                         condicion = true;
                         if(ejemplo3.verifyCredentialsP(ejemplo3.getUsuario(), ejemplo3.getContraseña()) == true){
-                            System.out.println("Menu Paciente");
+                            if(ejemplo3.evaluatecustomMenu(ejemplo3.showuserMenu()) == false){
+                                condicion = false;
+                            }else{
+                                        while (ejemplo3.evaluatecustomMenu(ejemplo3.showuserMenu()) == true);
+                                        condicion = false;
+                            }
                         }else{
                             System.out.println("Credenciales incorrectas");
                             System.out.println("Regresando al Menú Principal...\n\n");

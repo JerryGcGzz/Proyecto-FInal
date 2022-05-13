@@ -173,10 +173,10 @@ public class Doctor implements loginUser, userMenu{
     @Override
     public Integer showuserMenu(){
         Scanner entrada = new Scanner(System.in);
-        boolean condicion = false; //Valor que controla el ciclo while de digite una opcion del menu personalizado de Administrador
+        boolean condicion = false; //Valor que controla el ciclo while de digite una opcion del menu personalizado de Doctor
         Integer valorEvaluado = 0;
 
-        System.out.println("\n\n*************Menu de Doctorr*************\n"
+        System.out.println("\n\n*************Menu de Doctor*************\n"
                 +"1) Dar de alta paciente\n"
                 +"2) Crear cita\n"
                 +"3) Ver Citas\n"
