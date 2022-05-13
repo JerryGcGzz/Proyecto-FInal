@@ -85,7 +85,12 @@ public static boolean evaluateMenu(Integer a){
                     if(ejemplo2.verifyLoginD() == true){
                         condicion = true;
                         if(ejemplo2.verifyCredentialsD(ejemplo2.getUsuario(), ejemplo2.getContraseña()) == true){
-                            System.out.println("Menu Doctor");
+                            if(ejemplo2.evaluatecustomMenu(ejemplo2.showuserMenu()) == false){
+                                condicion = false;
+                            }else{
+                                        while(ejemplo2.evaluatecustomMenu(ejemplo2.showuserMenu()) == true);
+                                        condicion = false;
+                            }
                         }else{
                             System.out.println("Credenciales incorrectas");
                             System.out.println("Regresando al Menú Principal...\n\n");

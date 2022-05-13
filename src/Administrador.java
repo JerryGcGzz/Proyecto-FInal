@@ -160,6 +160,7 @@ public class Administrador implements loginUser, userMenu {
         return valorEvaluado;
     }
 
+    //Metodo para evaluar y ejecutar las opciones del menu personalizado administrador
     @Override
     public boolean evaluatecustomMenu(Integer a) {
         Boolean condicion = true;
