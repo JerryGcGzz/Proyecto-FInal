@@ -29,6 +29,17 @@ public class Paciente implements loginUser, userMenu{
         this.Nombre = Nombre;
     }
 
+    //Metodo para obtener elementos
+    public String getPaciente(int a){
+        String b = Pacientes.get(a).toString();
+        return b;
+    }
+
+    //Meto para obtener tamaño del array de Paciente
+    public int getsizePac(){
+        return Pacientes.size();
+    }
+
     //Metodo para cargar lista de pacientes actuales.
     void load(){
         String tokens[] = null;
@@ -64,6 +75,26 @@ public class Paciente implements loginUser, userMenu{
     public List<Object> addPacients(){
         Pacientes.add(ID+","+Nombre);
         return Pacientes;
+    }
+
+    //Metodo para ver todos los pacientes dados de alta-
+    public void listPacientes(){
+        String tokens[] = null;
+        int n=0;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Pacientes.txt"));
+            String line;
+            while((line = reader.readLine()) != null){
+                tokens = line.split(",");
+                System.out.println(n+")"+"ID: "+tokens[0]+"\n"+"Nombre: "+tokens[1]+"\n");
+                n++;
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Metodo para verificar si se escogio el login correcto

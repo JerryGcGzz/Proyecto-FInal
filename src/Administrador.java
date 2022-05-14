@@ -134,6 +134,8 @@ public class Administrador implements loginUser, userMenu {
             +"2) Dar de alta paciente\n"
             +"3) Generar una cita\n"
             +"4) Ver todas las citas\n"
+            +"5) Ver lista de doctores\n"
+            +"6) Ver lista de pacientes\n"
             +"0) Cerrar sesión\n"
         );
         while(!condicion){
@@ -141,8 +143,8 @@ public class Administrador implements loginUser, userMenu {
                 System.out.println("Digite una opción: ");
                 Integer opcion = entrada.nextInt();
 
-                if(opcion < 0 || opcion > 4) throw new Exception();
-                if(opcion < 0 || opcion > 4){
+                if(opcion < 0 || opcion > 6) throw new Exception();
+                if(opcion < 0 || opcion > 6){
                     condicion = false;
                 }else{
                     condicion = true;
@@ -150,10 +152,10 @@ public class Administrador implements loginUser, userMenu {
 
                 valorEvaluado = opcion;
             }catch (InputMismatchException e){
-                System.out.println("Dato inválido, digite un número del 0 al 4");
+                System.out.println("Dato inválido, digite un número del 0 al 6");
                 entrada.next();
             }catch(Exception e){
-                System.out.println("Dato inválido, digite un número del 0 al 4");
+                System.out.println("Dato inválido, digite un número del 0 al 6");
             }
 
         }
@@ -200,13 +202,117 @@ public class Administrador implements loginUser, userMenu {
                 paciente.addPacients();
                 paciente.save();
                 break;
+
             case 3:
+
                 condicion = true;
-                System.out.println("Crear cita");
+                Scanner teclado = new Scanner(System.in);
+
+                //Creacion de objetos
+                Doctor doctor2 = new Doctor();
+                Paciente paciente2 = new Paciente();
+                Cita cita = new Cita();
+
+                //cargar los archivos respectivos
+                doctor2.load();
+                paciente2.load();
+                cita.load();
+
+                //Muestra los dcotores y pacientes dados de alta
+                System.out.println("Cargando base de datos de doctores....\n");
+                System.out.println("Doctores disponibles: ");
+                doctor2.listDoctor();
+                System.out.println("Cargando base de datos de pacientes....\n");
+                System.out.println("Pacientes dados de alta: ");
+                paciente2.listPacientes();
+
+
+
+                //Llena los campos para generar una cita
+                System.out.println("Llene los siguientes parametros: ");
+                System.out.println("Ingrese el ID de la cita: ");
+                cita.setId(teclado.nextLine());
+                System.out.println("Ingrese la fecha de la cita: ");
+                cita.setFecha(teclado.nextLine());
+                System.out.println("Ingrese el motivo de la cita: ");
+                cita.setMotivo(teclado.nextLine());
+
+                //Metodo para comprobar que el doctor existe
+                boolean condicionD = false;
+                while(!condicionD)
+                try {
+                    System.out.println("Ingrese el index del doctor al cual se le va agendar la cita: ");
+                    int indexD = teclado.nextInt();
+
+                    if(indexD < 0 || indexD >= doctor2.getsizeDoc()) throw new Exception();
+                    if(indexD < 0 || indexD >= doctor2.getsizeDoc()){
+                        condicionD = false;
+                    }else{
+                        condicionD = true;
+                    }
+
+                    String tempD = doctor2.getDoctors(indexD);
+                    cita.setMedico(tempD);
+                }catch (InputMismatchException e){
+                    System.out.println("Dato invalido, ingrese un index");
+                    teclado.next();
+                }catch (Exception e){
+                    System.out.println("Dato invalido, fuera de rango");
+                }
+
+                //Metodo para comprobar que el paciente existe
+                boolean condicionP = false;
+                while (!condicionP) {
+                    try {
+                        System.out.println("Ingrese el index del paciente al cual se le va agendar la cita: ");
+                        int indexP = teclado.nextInt();
+
+                        if(indexP < 0 || indexP >= paciente2.getsizePac()) throw new Exception();
+                        if(indexP < 0 || indexP >= paciente2.getsizePac()){
+                            condicionP = false;
+                        }else{
+                            condicionP = true;
+                        }
+
+                        String tempP = paciente2.getPaciente(indexP);
+                        cita.setPaciente(tempP);
+                    }catch (InputMismatchException e){
+                        System.out.println("Dato invalido, ingrese un index");
+                        teclado.next();
+                    }catch (Exception e){
+                        System.out.println("Dato invalido, fuera de rango");
+                    }
+                }
+
+                cita.addCitas();
+                cita.save();
                 break;
+
             case 4:
                 condicion = true;
-                System.out.println("Ver citas");
+                Cita cita1 = new Cita();
+
+                cita1.load();
+                System.out.println("Citas dentro del sistema: ");
+                cita1.listCitas();
+                break;
+
+            case 5:
+                condicion = true;
+                Doctor doctor1 = new Doctor();
+
+                doctor1.load();
+                System.out.println("Lista de docotes activos: ");
+                doctor1.listDoctor();
+                break;
+
+            case 6:
+                condicion = true;
+                Paciente paciente1 = new Paciente();
+
+                paciente1.load();
+                System.out.println("Lista de pacientes dados de alta: ");
+                paciente1.listPacientes();
                 break;
         }
         return condicion;

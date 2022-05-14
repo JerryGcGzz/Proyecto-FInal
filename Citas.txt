@@ -1,0 +1,2 @@
+5555,23/02/2024,Cabeza,5959595,Perez,General,4554,Juan
+159,27/02/2023,Dolor de cabeza,1010,Pan,cardiologo,12345,Julio

@@ -1,69 +1,121 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Cita {
+
     private String id;
     private String motivo;
-    private String dia;
-    private String mes;
-    private String año;
-    private String hora;
-    private String minutos;
+    private String fecha;
+    private Object medico;
+    private Object paciente;
 
+    private List<Object> citas = new ArrayList();
 
-    //Constructores de la clase Cita
-    public String id(){
+    public String getId() {
         return id;
     }
-    public void getid(String id){
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String motivo(){
+    public String getMotivo() {
         return motivo;
     }
 
-    public void getmotivo(String motivo){
+    public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
 
-    public  String dia(){
-        return dia;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void getDia(String dia){
-        this.dia = dia;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public String mes(){
-        return mes;
+    public Object getMedico() {
+        return medico;
     }
 
-    public void getMes(String mes){
-        this.mes = mes;
+    public void setMedico(Object medico) {
+        this.medico = medico;
     }
 
-    public String año(){
-        return año;
+    public Object getPaciente() {
+        return paciente;
     }
 
-    public void getAño(String año){
-        this.año = año;
+    public void setPaciente(Object paciente) {
+        this.paciente = paciente;
     }
 
-    public String hora(){
-        return hora;
+    //Metodo para cargar lista de citas.
+    void load(){
+        String tokens[] = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Citas.txt"));
+            String line;
+            while((line = reader.readLine()) != null){
+                tokens = line.split(",");
+                citas.add(tokens[0]+","+tokens[1]+","+tokens[2]+","+tokens[3]+","+tokens[4]+","+tokens[5]+","+tokens[6]+","+tokens[7]);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void getHora(String hora){
-        this.hora = hora;
+    //Metodo para añadir citas
+    void save(){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("Citas.txt"));
+            for(Object o : citas){
+                writer.write(o+"\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String minutos(){
-        return minutos;
+    //Metodo para dar de alta pacientes desde programa.
+    public List<Object> addCitas(){
+        citas.add(id+","+fecha+","+motivo+","+medico+","+paciente);
+        return citas;
     }
 
-    public void getMinutos(String minutos){
-        this.minutos = minutos;
+    //Metodo para ver todas las citas del sistema
+    void listCitas(){
+        String tokens[] = null;
+        int n=0;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Citas.txt"));
+            String line;
+            while((line = reader.readLine()) != null){
+                tokens = line.split(",");
+                System.out.println(n+")"+"ID: "+tokens[0]+"\n"+"Fecha: "+tokens[1]+"\n"+"Motivo: "+tokens[2]+"\n"+"ID Doctor: "+tokens[3]+"\n"+"Doctor: "+tokens[4]+"\n"+"Especialidad: "+tokens[5]+"\n"+"ID Paciente: "+tokens[6]+"\n"+"Paciente: "+tokens[7]+"\n");
+                n++;
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 
 
 }
+
+
+
+
+
+
+

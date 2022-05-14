@@ -7,7 +7,19 @@ public class Doctor implements loginUser, userMenu{
      private String ID;
      private String nombre;
      private String especialidad;
-     private List<Object> Doctors = new ArrayList<>();
+     List<Object> Doctors = new ArrayList<>();
+
+     //Metodo para obtener elementos
+    public String  getDoctors(int a){
+       String b = Doctors.get(a).toString();
+       return b;
+    }
+
+    //Meto para obtener tamaño del array de Doctor
+    public int getsizeDoc(){
+        return Doctors.size();
+    }
+
 
     //Metodo para añadir doctores desde el progrmama
     public List<Object> addDoctors(){
@@ -40,13 +52,25 @@ public class Doctor implements loginUser, userMenu{
         this.especialidad = especialidad;
     }
 
-    public  void listDoctor(){
-        System.out.println("Lista de Doctores: ");
-        System.out.println("[ID]"+" [Nombre]"+" [Especialidad]");
-        for (Object o : Doctors) {
-            System.out.println(o);
-        }
 
+    //Metodo para ver docotores activos en el sistema
+    public  void listDoctor(){
+        String tokens[] = null;
+        int n=0;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Doctores.txt"));
+            String line;
+            while((line = reader.readLine()) != null){
+                tokens = line.split(",");
+                System.out.println(n+")"+"ID: "+tokens[0]+"\n"+"Nombre: "+tokens[1]+"\n"+"Especialidad: "+tokens[2]+"\n");
+                n++;
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Metodo para cargar doctores existentes
