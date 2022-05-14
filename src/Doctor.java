@@ -324,6 +324,7 @@ public class Doctor implements loginUser, userMenu{
 
                 cita.setMedico(ID+","+nombre+","+especialidad);
 
+                //Metodo para verificar que el paciente esta dado de alta.
                 boolean condicionP = false;
                 while (!condicionP) {
                     try {

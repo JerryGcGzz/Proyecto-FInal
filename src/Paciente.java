@@ -232,21 +232,85 @@ public class Paciente implements loginUser, userMenu{
                 break;
 
             case 1:
-                System.out.println("Crear cita");
+                condicion = true;
+                Scanner input = new Scanner(System.in);
+
+
+                Doctor doctor = new Doctor();
+                Paciente paciente = new Paciente();
+                Cita cita = new Cita();
+
+                doctor.load();
+                paciente.load();
+                cita.load();
+
+                System.out.println("Cargando base de datos....");
+                System.out.println("Doctores dados activos: ");
+                doctor.listDoctor();
+
+                //Llena los campos para generar una cita
+                System.out.println("Llene los siguientes parametros: ");
+                System.out.println("Ingrese el ID de la cita: ");
+                cita.setId(input.nextLine());
+                System.out.println("Ingrese la fecha de la cita: ");
+                cita.setFecha(input.nextLine());
+                System.out.println("Ingrese el motivo de la cita: ");
+                cita.setMotivo(input.nextLine());
+
+                //Metodo para comprobar que el doctor existe
+                boolean condicionD = false;
+                while(!condicionD)
+                    try {
+                        System.out.println("Ingrese el index del doctor al cual se le va agendar la cita: ");
+                        int indexD = input.nextInt();
+
+                        if(indexD < 0 || indexD >= doctor.getsizeDoc()) throw new Exception();
+                        if(indexD < 0 || indexD >= doctor.getsizeDoc()){
+                            condicionD = false;
+                        }else{
+                            condicionD = true;
+                        }
+
+                        String tempD = doctor.getDoctors(indexD);
+                        cita.setMedico(tempD);
+                    }catch (InputMismatchException e){
+                        System.out.println("Dato invalido, ingrese un index");
+                        input.next();
+                    }catch (Exception e){
+                        System.out.println("Dato invalido, fuera de rango");
+                    }
+
+                    //Se añade el paciente que inicio sesion
+                    cita.setPaciente(ID+","+Nombre);
+
+                cita.addCitas();
+                cita.save();
                 break;
 
             case 2:
                 condicion = true;
-                System.out.println("Ver citas");
+                String tokens[] = null;
+                int n=0;
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("Citas.txt"));
+                    String line;
+                    while((line = reader.readLine()) != null){
+                        tokens = line.split(",");
+                        String tempPass = tokens[6];
+                        String tempUser = tokens[7];
+                        if (Nombre.equals(tempUser) && ID.equals(tempPass)) {
+                            System.out.println(n+")"+"ID: "+tokens[0]+"\n"+"Fecha: "+tokens[1]+"\n"+"Motivo: "+tokens[2]+"\n"+"ID Doctor: "+tokens[3]+"\n"+"Doctor: "+tokens[4]+"\n"+"Especialidad: "+tokens[5]+"\n"+"ID Paciente: "+tokens[6]+"\n"+"Paciente: "+tokens[7]+"\n");
+                            n++;
+                        }
+                    }
+                    reader.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         return condicion;
     }
-
-
-
-
-
-
-
 }
