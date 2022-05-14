@@ -192,6 +192,44 @@ public class Doctor implements loginUser, userMenu{
         return condicion;
     }
 
+    //Metodo para guardar nopmbre
+    public String saveCredentials(){
+        return nombre;
+    }
+
+    //Metodo para guardad id
+    public  String saveID(){
+        return ID;
+    }
+
+    //Metodo para guardar especialiad
+    public String saveEsp(){
+        boolean condicion = false;
+        String tokens2[] = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Doctores.txt"));
+            String line;
+            while((line = reader.readLine()) != null && condicion == false){
+                tokens2 = line.split(",");
+                String tempPass = tokens2[0];
+                String tempUser = tokens2[1];
+                if (nombre.equals(tempUser) && ID.equals(tempPass)) {
+                    condicion = true;
+                    especialidad = tokens2[2];
+                    break;
+                } else {
+                    condicion = false;
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return especialidad;
+    }
+
 
     //Metodo para imprimir el menu personalizado de los doctores
     @Override
@@ -259,22 +297,86 @@ public class Doctor implements loginUser, userMenu{
                 break;
 
             case 2:
+                Scanner input = new Scanner(System.in);
                 condicion = true;
-                System.out.println("Crear cita");
+
+                Doctor doctor = new Doctor();
+                Paciente paciente2 = new Paciente();
+                Cita cita = new Cita();
+
+                doctor.load();
+                paciente2.load();
+                cita.load();
+
+
+                System.out.println("Cargando base de datos....");
+                System.out.println("Pacientes dados de alta: ");
+                paciente2.listPacientes();
+
+                //Llena los campos para generar una cita
+                System.out.println("Llene los siguientes parametros: ");
+                System.out.println("Ingrese el ID de la cita: ");
+                cita.setId(input.nextLine());
+                System.out.println("Ingrese la fecha de la cita: ");
+                cita.setFecha(input.nextLine());
+                System.out.println("Ingrese el motivo de la cita: ");
+                cita.setMotivo(input.nextLine());
+
+                cita.setMedico(ID+","+nombre+","+especialidad);
+
+                boolean condicionP = false;
+                while (!condicionP) {
+                    try {
+                        System.out.println("Ingrese el index del paciente al cual se le va agendar la cita: ");
+                        int indexP = input.nextInt();
+
+                        if(indexP < 0 || indexP >= paciente2.getsizePac()) throw new Exception();
+                        if(indexP < 0 || indexP >= paciente2.getsizePac()){
+                            condicionP = false;
+                        }else{
+                            condicionP = true;
+                        }
+
+                        String tempP = paciente2.getPaciente(indexP);
+                        cita.setPaciente(tempP);
+                    }catch (InputMismatchException e){
+                        System.out.println("Dato invalido, ingrese un index");
+                        input.next();
+                    }catch (Exception e){
+                        System.out.println("Dato invalido, fuera de rango");
+                    }
+                }
+
+                cita.addCitas();
+                cita.save();
                 break;
 
             case 3:
                 condicion = true;
-                System.out.println("Ver citas");
+                String tokens[] = null;
+                int n=0;
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("Citas.txt"));
+                    String line;
+                    while((line = reader.readLine()) != null){
+                        tokens = line.split(",");
+                        String tempPass = tokens[3];
+                        String tempUser = tokens[4];
+                        if (nombre.equals(tempUser) && ID.equals(tempPass)) {
+                            System.out.println(n+")"+"ID: "+tokens[0]+"\n"+"Fecha: "+tokens[1]+"\n"+"Motivo: "+tokens[2]+"\n"+"ID Doctor: "+tokens[3]+"\n"+"Doctor: "+tokens[4]+"\n"+"Especialidad: "+tokens[5]+"\n"+"ID Paciente: "+tokens[6]+"\n"+"Paciente: "+tokens[7]+"\n");
+                            n++;
+                        }
+                    }
+                    reader.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         return condicion;
     }
-
-
-
-
-
 
 
 
