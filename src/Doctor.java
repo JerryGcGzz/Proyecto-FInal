@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 public class Doctor {
 =======
 import java.io.*;

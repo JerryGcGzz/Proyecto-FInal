@@ -1,8 +1,4 @@
 <<<<<<< HEAD
-public class Consultorio {
-
-
-}
 =======
 import java.util.InputMismatchException;
 import java.util.Scanner;
