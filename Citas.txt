@@ -3,3 +3,6 @@
 1515,10/01/2023,consulta,8888,Lulu,Partera,77777,Luna
 9198,24/02/2025,Consulta anual,5555,Jerry,General,88888,Tyson
 8989,22/02/2024,Cita anual,2367,Cony,Pediatra,77777,Luna
+789,15/07/2022,Dolor de cabeza,123321,Antonio,General,8956,Carlos
+7812,14/05/2022,Mareos,123321,Antonio,General,5478,Patricio
+59591,16/05/2022,Dolor estomacal,2367,Cony,Pediatra,77777,Luna
