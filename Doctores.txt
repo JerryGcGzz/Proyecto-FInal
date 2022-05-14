@@ -1,0 +1,10 @@
+5555,Jerry,General
+9999,Pepe,General
+8888,Lulu,Partera
+6667,Kiko,General
+23026,Gerardo,Neurocirujano
+2367,Cony,Pediatra
+1010,Pan,cardiologo
+789256,Guillermo,General
+5959595,Perez,General
+123321,Antonio,General

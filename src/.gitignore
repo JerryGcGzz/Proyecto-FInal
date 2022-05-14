@@ -1,3 +1,9 @@
+<<<<<<< HEAD:src/.gitignore
 ../.idea/
+=======
+.idea/
+out/production/Proyecto Final
+>>>>>>> develop:.gitignore
 .class
 .swp
+
