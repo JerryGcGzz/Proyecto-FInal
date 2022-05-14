@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-public class Administrador {
-=======
 import java.io.*;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -133,13 +130,13 @@ public class Administrador implements loginUser, userMenu {
         Integer valorEvaluado = 0;
 
         System.out.println("\n\n*************Menu de Administrador*************\n"
-            +"1) Dar de alta doctor\n"
-            +"2) Dar de alta paciente\n"
-            +"3) Generar una cita\n"
-            +"4) Ver todas las citas\n"
-            +"5) Ver lista de doctores\n"
-            +"6) Ver lista de pacientes\n"
-            +"0) Cerrar sesión\n"
+                +"1) Dar de alta doctor\n"
+                +"2) Dar de alta paciente\n"
+                +"3) Generar una cita\n"
+                +"4) Ver todas las citas\n"
+                +"5) Ver lista de doctores\n"
+                +"6) Ver lista de pacientes\n"
+                +"0) Cerrar sesión\n"
         );
         while(!condicion){
             try{
@@ -243,25 +240,25 @@ public class Administrador implements loginUser, userMenu {
                 //Metodo para comprobar que el doctor existe
                 boolean condicionD = false;
                 while(!condicionD)
-                try {
-                    System.out.println("Ingrese el index del doctor al cual se le va agendar la cita: ");
-                    int indexD = teclado.nextInt();
+                    try {
+                        System.out.println("Ingrese el index del doctor al cual se le va agendar la cita: ");
+                        int indexD = teclado.nextInt();
 
-                    if(indexD < 0 || indexD >= doctor2.getsizeDoc()) throw new Exception();
-                    if(indexD < 0 || indexD >= doctor2.getsizeDoc()){
-                        condicionD = false;
-                    }else{
-                        condicionD = true;
+                        if(indexD < 0 || indexD >= doctor2.getsizeDoc()) throw new Exception();
+                        if(indexD < 0 || indexD >= doctor2.getsizeDoc()){
+                            condicionD = false;
+                        }else{
+                            condicionD = true;
+                        }
+
+                        String tempD = doctor2.getDoctors(indexD);
+                        cita.setMedico(tempD);
+                    }catch (InputMismatchException e){
+                        System.out.println("Dato invalido, ingrese un index");
+                        teclado.next();
+                    }catch (Exception e){
+                        System.out.println("Dato invalido, fuera de rango");
                     }
-
-                    String tempD = doctor2.getDoctors(indexD);
-                    cita.setMedico(tempD);
-                }catch (InputMismatchException e){
-                    System.out.println("Dato invalido, ingrese un index");
-                    teclado.next();
-                }catch (Exception e){
-                    System.out.println("Dato invalido, fuera de rango");
-                }
 
                 //Metodo para comprobar que el paciente existe
                 boolean condicionP = false;
@@ -322,6 +319,5 @@ public class Administrador implements loginUser, userMenu {
     }
 
 
->>>>>>> develop
 
 }

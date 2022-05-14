@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-public class Cita {
-
-
-}
-=======
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,9 +114,3 @@ public class Cita {
 }
 
 
-
-
-
-
-
->>>>>>> develop

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-public class Paciente {
-
-=======
 import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -284,8 +280,8 @@ public class Paciente implements loginUser, userMenu{
                         System.out.println("Dato invalido, fuera de rango");
                     }
 
-                    //Se añade el paciente que inicio sesion
-                    cita.setPaciente(ID+","+Nombre);
+                //Se añade el paciente que inicio sesion
+                cita.setPaciente(ID+","+Nombre);
 
                 cita.addCitas();
                 cita.save();
@@ -317,5 +313,4 @@ public class Paciente implements loginUser, userMenu{
         }
         return condicion;
     }
->>>>>>> develop
 }

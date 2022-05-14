@@ -1,21 +1,18 @@
-
-public class Doctor {
-=======
 import java.io.*;
 import java.util.*;
 
 public class Doctor implements loginUser, userMenu{
     Scanner entrada = new Scanner(System.in);
 
-     private String ID;
-     private String nombre;
-     private String especialidad;
-     List<Object> Doctors = new ArrayList<>();
+    private String ID;
+    private String nombre;
+    private String especialidad;
+    List<Object> Doctors = new ArrayList<>();
 
-     //Metodo para obtener elementos
+    //Metodo para obtener elementos
     public String  getDoctors(int a){
-       String b = Doctors.get(a).toString();
-       return b;
+        String b = Doctors.get(a).toString();
+        return b;
     }
 
     //Meto para obtener tamaño del array de Doctor
@@ -167,7 +164,7 @@ public class Doctor implements loginUser, userMenu{
 
     //Metodo para verificar credenciales de doctor
     public boolean verifyCredentialsD(String Usuario, String contraseña){
-    boolean condicion = false;
+        boolean condicion = false;
         String tokens2[] = null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader("Doctores.txt"));
@@ -384,6 +381,5 @@ public class Doctor implements loginUser, userMenu{
 
 
 
->>>>>>> develop
 
 }
